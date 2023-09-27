@@ -13,19 +13,26 @@
       <th>カテゴリ選択</th>
       <th>クイズ削除</th>
     </tr>
-    @foreach ($quizzes as $quiz)
+
+    @foreach ($quizzes as $question)
+
     <tr>
       <td>
-        {{ $quiz->id }}
+        {{ $question->id }}
       </td>
       <td>
-        {{ $quiz->name }}
+        {{ $question->name }}
       </td>
       <td>
-        {{ $quiz->created_at }}
+        {{ $question->created_at }}
       </td>
       <td>
-        {{ $quiz->updated_at }}
+        {{ $question->updated_at }}
+      </td>
+      <td>
+        <button>
+          <a href="{{ route('quizzes.selectedCategory', $question->id) }}">選択</a>
+        </button>
       </td>
 
     </tr>

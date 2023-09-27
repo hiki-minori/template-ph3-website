@@ -17,13 +17,13 @@ class Questions extends Model
         'quiz_id',
     ];
 
-    public function quiz()
+    public function quizzes()
     {
-        return $this->belongsTo(Quiz::class);
+        return $this->belongsTo(Quizzes::class);
     }
 
-    public function choice()
+    public function choices()
     {
-        return $this->hasMany(Choice::class);
+        return $this->hasMany(Choices::class,'question_id', 'id');
     }
 }

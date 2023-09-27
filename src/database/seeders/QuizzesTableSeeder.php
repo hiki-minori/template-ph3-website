@@ -202,21 +202,5 @@ class QuizzesTableSeeder extends Seeder
             'text' => 'コアラ',
             'is_correct' => true,
         ]);
-
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

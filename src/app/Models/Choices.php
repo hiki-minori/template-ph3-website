@@ -16,8 +16,8 @@ class Choices extends Model
         'is_correct',
     ];
 
-    public function question()
+    public function questions()
     {
-        return $this->belongsTo(Question::class);
+        return $this->belongsTo(Questions::class);
     }
 }
