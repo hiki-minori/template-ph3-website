@@ -48,5 +48,29 @@ class QuizController extends Controller
         return redirect()->route('quizzes.selectedCategory', ['quizNum' => $question->quiz_id]);
     }
 
+        /**
+     * クイズ削除
+     */
+    public function delete($quizId)
+    {
+        $questions = Questions::where('quiz_id', $quizId)->get();
+        foreach ($questions as $question) {
+            $choices = Choices::where('question_id', $question->id)->get();
+            foreach ($choices as $choice) {
+                // 選択肢を削除
+                $choice->delete();
+            }
+            // 問題文を削除
+            $question->delete();
+        }
+
+        $quiz = Quizzes::find($quizId);
+        // クイズを削除
+        $quiz->delete();
+
+        session()->flash('message', '削除が完了しました');
+        return redirect()->route('quizzes.index');
+    }
+
 }
 

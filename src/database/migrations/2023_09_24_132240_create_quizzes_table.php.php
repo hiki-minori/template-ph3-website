@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (!Schema::hasTable('quizzes')) {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('カテゴライズしたクイズ名 ex.) ITクイズ');
             $table->timestamps();
             $table->softDeletes();
         });
-
+    }
+    if (!Schema::hasTable('questions')) {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('image')->comment('設問画像 ex.) /image/sample.jpg');
@@ -29,6 +31,9 @@ return new class extends Migration
 
             $table->foreign('quiz_id')->references('id')->on('quizzes');
         });
+    }
+
+    if (!Schema::hasTable('choices')) {
 
         Schema::create('choices', function (Blueprint $table) {
             $table->id();
@@ -40,6 +45,7 @@ return new class extends Migration
 
             $table->foreign('question_id')->references('id')->on('questions');
         });
+    }
     }
 
     /**

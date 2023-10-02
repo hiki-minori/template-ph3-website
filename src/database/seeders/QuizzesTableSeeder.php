@@ -202,5 +202,15 @@ class QuizzesTableSeeder extends Seeder
             'text' => 'コアラ',
             'is_correct' => true,
         ]);
+
+        Quizzes::factory()->count(20)->create()->each(function ($quiz) {
+            // 1つのクイズに対して3つのQuestionを作成
+            Questions::factory()->count(3)->create(['quiz_id' => $quiz->id])->each(function ($question) {
+                // 各Questionに対して2つのis_correctが0のChoiceを作成
+                Choices::factory()->count(2)->state(['is_correct' => 0])->create(['question_id' => $question->id]);
+                // 各Questionに対して1つのis_correctが1のChoiceを作成
+                Choices::factory()->state(['is_correct' => 1])->create(['question_id' => $question->id]);
+            });
+        });
     }
 }

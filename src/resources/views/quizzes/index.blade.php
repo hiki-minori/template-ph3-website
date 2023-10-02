@@ -34,8 +34,16 @@
           <a href="{{ route('quizzes.selectedCategory', $question->id) }}">選択</a>
         </button>
       </td>
+      <td>
+        <form action="{{ route('quiz.delete', $question->id) }}" method="post" id="deleteForm{{$question->id}}">
+          @csrf
+          <input type="hidden" name="quiz_id" value="{{ $question->id }}">
+          <button class="deleteQuiz">削除</button>
+        </form>
+      </td>
 
     </tr>
     @endforeach
   </table>
+  <script src="{{ asset('js/quiz.js')}}"></script>
 </x-user-layout>
